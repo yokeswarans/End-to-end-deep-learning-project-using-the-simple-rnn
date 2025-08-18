@@ -93,7 +93,7 @@ def predict_sentiment(review):
     sentiment = 'Positive' if prediction[0][0] > 0.5 else 'Negative'
     return sentiment, prediction[0][0]
 
-# Sample reviews from IMDB test set for users
+'''# Sample reviews from IMDB test set for users
 (_, _), (X_test, y_test) = imdb.load_data(num_words=10000)
 sample_reviews = [
     (decode_review(X_test[0]), y_test[0]),
@@ -111,7 +111,32 @@ cols = st.columns(3)
 for idx, (review, label) in enumerate(sample_reviews):
     label_text = "✅ Positive" if label == 1 else "❌ Negative"
     if cols[idx].button(f"Sample {idx+1} ({label_text})"):
-        st.session_state["user_input"] = review
+        st.session_state["user_input"] = review'''
+
+# Sample reviews for testing
+st.subheader("📌 Sample Reviews")
+sample_positive = [
+    "An absolute masterpiece. The performances were stunning and the story kept me hooked from start to finish.",
+    "Beautiful cinematography and a moving soundtrack. Easily one of the best films I've seen in years.",
+    "I loved every second of it. The plot twists were unexpected but made perfect sense."
+]
+sample_negative = [
+    "A complete waste of time. The acting was wooden and the plot made no sense at all.",
+    "Poor pacing and predictable storyline. I nearly fell asleep halfway through.",
+    "Overhyped and underwhelming. I regret spending money on this."
+]
+
+# Display in two columns
+col1, col2 = st.columns(2)
+with col1:
+    st.markdown("**Positive**")
+    for review in sample_positive:
+        st.write(f"✅ {review}")
+
+with col2:
+    st.markdown("**Negative**")
+    for review in sample_negative:
+        st.write(f"❌ {review}")
 
 # Review input
 user_input = st.text_area("📝 Movie Review", value=st.session_state.get("user_input", ""), height=150)
